@@ -1,5 +1,9 @@
 # Components Basics {#components-basics}
 
+<ScrimbaLink href="https://scrimba.com/links/vue-component-basics" title="Free Vue.js Components Basics Lesson" type="scrimba">
+  Watch an interactive video lesson on Scrimba
+</ScrimbaLink>
+
 Components allow us to split the UI into independent and reusable pieces, and think about each piece in isolation. It's common for an app to be organized into a tree of nested components:
 
 ![Component Tree](./images/components.png)
@@ -184,8 +188,7 @@ Props are custom attributes you can register on a component. To pass a title to 
 
 <div class="options-api">
 
-```vue
-<!-- BlogPost.vue -->
+```vue [BlogPost.vue]
 <script>
 export default {
   props: ['title']
@@ -202,8 +205,7 @@ When a value is passed to a prop attribute, it becomes a property on that compon
 </div>
 <div class="composition-api">
 
-```vue
-<!-- BlogPost.vue -->
+```vue [BlogPost.vue]
 <script setup>
 defineProps(['title'])
 </script>
@@ -348,8 +350,8 @@ Which can be used in the template to control the font size of all blog posts:
 
 Now let's add a button to the `<BlogPost>` component's template:
 
-```vue{5}
-<!-- BlogPost.vue, omitting <script> -->
+```vue{5} [BlogPost.vue]
+<!-- omitting <script> -->
 <template>
   <div class="blog-post">
     <h4>{{ title }}</h4>
@@ -369,8 +371,8 @@ The button doesn't do anything yet - we want clicking the button to communicate 
 
 Then the child component can emit an event on itself by calling the built-in [**`$emit`** method](/api/component-instance#emit), passing the name of the event:
 
-```vue{5}
-<!-- BlogPost.vue, omitting <script> -->
+```vue{5} [BlogPost.vue]
+<!-- omitting <script> -->
 <template>
   <div class="blog-post">
     <h4>{{ title }}</h4>
@@ -396,8 +398,7 @@ We can optionally declare emitted events using the <span class="options-api">[`e
 
 <div class="options-api">
 
-```vue{5}
-<!-- BlogPost.vue -->
+```vue{4} [BlogPost.vue]
 <script>
 export default {
   props: ['title'],
@@ -409,8 +410,7 @@ export default {
 </div>
 <div class="composition-api">
 
-```vue{4}
-<!-- BlogPost.vue -->
+```vue{3} [BlogPost.vue]
 <script setup>
 defineProps(['title'])
 defineEmits(['enlarge-text'])
@@ -468,8 +468,7 @@ Something bad happened.
 
 This can be achieved using Vue's custom `<slot>` element:
 
-```vue{5}
-<!-- AlertBox.vue -->
+```vue{4} [AlertBox.vue]
 <template>
   <div class="alert-box">
     <strong>This is an Error for Demo Purposes</strong>

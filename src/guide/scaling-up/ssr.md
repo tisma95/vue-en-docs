@@ -156,8 +156,8 @@ Notice how we need to reuse the same app implementation as on the server. This i
 
 Here we will demonstrate the most bare-bones setup. First, let's split the app creation logic into a dedicated file, `app.js`:
 
-```js
-// app.js (shared between server and client)
+```js [app.js]
+// (shared between server and client)
 import { createSSRApp } from 'vue'
 
 export function createApp() {
@@ -172,8 +172,7 @@ This file and its dependencies are shared between the server and the client - we
 
 Our client entry imports the universal code, creates the app, and performs the mount:
 
-```js
-// client.js
+```js [client.js]
 import { createApp } from './app.js'
 
 createApp().mount('#app')
@@ -181,8 +180,8 @@ createApp().mount('#app')
 
 And the server uses the same app creation logic in the request handler:
 
-```js{2,5}
-// server.js (irrelevant code omitted)
+```js{2,5} [server.js]
+// (irrelevant code omitted)
 import { createApp } from './app.js'
 
 server.get('/', (req, res) => {
@@ -267,8 +266,8 @@ We can technically re-initialize all the JavaScript modules on each request, jus
 
 The recommended solution is to create a new instance of the entire application - including the router and global stores - on each request. Then, instead of directly importing it in our components, we provide the shared state using [app-level provide](/guide/components/provide-inject#app-level-provide) and inject it in components that need it:
 
-```js
-// app.js (shared between server and client)
+```js [app.js]
+// (shared between server and client)
 import { createSSRApp } from 'vue'
 import { createStore } from './store.js'
 

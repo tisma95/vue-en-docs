@@ -298,16 +298,20 @@ function inc() {
 :::warning
 If you have a `default` value for `defineModel` prop and you don't provide any value for this prop from the parent component, it can cause a de-synchronization between parent and child components. In the example below, the parent's `myRef` is undefined, but the child's `model` is 1:
 
-```js
-// child component:
+```vue [Child.vue]
+<script setup>
 const model = defineModel({ default: 1 })
-
-// parent component:
-const myRef = ref()
+</script>
 ```
 
-```html
-<Child v-model="myRef"></Child>
+```vue [Parent.vue]
+<script setup>
+const myRef = ref()
+</script>
+
+<template>
+  <Child v-model="myRef"></Child>
+</template>
 ```
 
 :::
@@ -527,10 +531,10 @@ You can use `@vue-generic` the directive to pass in explicit types, for when the
 ```vue
 <template>
   <!-- @vue-generic {import('@/api').Actor} -->
-  <ApiSelect v-model="selectedPeopleIds" endpoint="/api/actors" id-prop="actorId" />
+  <ApiSelect v-model="peopleIds" endpoint="/api/actors" id-prop="actorId" />
 
   <!-- @vue-generic {import('@/api').Genre} -->
-  <ApiSelect v-model="selectedGenreIds" endpoint="/api/genres" id-prop="genreId" />
+  <ApiSelect v-model="genreIds" endpoint="/api/genres" id-prop="genreId" />
 </template>
 ```
 
